@@ -1,5 +1,6 @@
 # 50 Startups Profit Prediction & Feature Analysis
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://charleslu1996.github.io/L5-1/)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.14-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -7,17 +8,43 @@ An end-to-end Machine Learning project implementing the **CRISP-DM** (Cross-Indu
 
 ---
 
+## 🚀 Live Demo
+
+Experience the interactive model directly in your browser:
+
+👉 **[Launch Interactive Web Demo (GitHub Pages)](https://charleslu1996.github.io/L5-1/)**
+
+### Local Preview
+You can also launch the web demo locally without external dependencies:
+
+```bash
+# Option 1: Using Python built-in HTTP server
+python -m http.server 8000
+
+# Then open http://localhost:8000 in your browser
+```
+*(Or simply open `index.html` directly in any web browser).*
+
+**Key Features of the Live Demo:**
+- **Real-Time Sliders**: Adjust R&D Spend, Marketing Spend, Administration budget, and Company State.
+- **Instant Inference**: Computes predicted profit immediately using the fitted regression formula.
+- **Financial Breakdown**: Visualizes the positive and negative dollar contributions of each spending variable.
+- **Preset Scenarios**: Quick-test presets like *High-Growth Tech*, *Balanced Profile*, and *Early Bootstrapped*.
+
+---
+
 ## Description
 
 This project analyzes the **50 Startups** dataset to predict startup `Profit` using spending in Research & Development (`R&D Spend`), Administration expenses (`Administration`), Marketing budget (`Marketing Spend`), and company headquarters (`State`). 
 
-Through rigorous exploratory data analysis, data preparation via scikit-learn pipelines, Multiple Linear Regression modeling, and iterative Forward Feature Selection, this project reveals key financial drivers of profitability. It demonstrates that R&D and Marketing investments serve as the primary profit drivers, achieving an $R^2$ of up to ~0.95 on held-out test data.
+Through exploratory data analysis, data preparation via scikit-learn pipelines, Multiple Linear Regression modeling, and iterative Forward Feature Selection, this project reveals key financial drivers of profitability. It demonstrates that R&D and Marketing investments serve as the primary profit drivers, achieving an $R^2$ of up to ~0.95 on held-out test data.
 
 ---
 
 ## Features
 
 - **CRISP-DM Lifecycle Implementation**: Structured across all 6 phases: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment.
+- **Interactive Web Simulator**: Zero-dependency browser-based live demo for instant profit estimation and feature contribution analysis.
 - **Robust Scikit-Learn Pipelines**: Uses `ColumnTransformer` and `OneHotEncoder` to encode categorical location data while preventing data leakage and dummy variable traps.
 - **Forward Feature Selection Analysis**: Evaluates subset model performance across 1 to 5 features, identifying the optimal predictor combination that minimizes RMSE and maximizes $R^2$.
 - **Model Evaluation & Residual Diagnostics**: Tracks standard regression metrics (MAE, MSE, RMSE, $R^2$) and outputs visual diagnostics comparing actual vs. predicted values.
@@ -28,12 +55,12 @@ Through rigorous exploratory data analysis, data preparation via scikit-learn pi
 
 ## Tech Stack
 
-- **Language**: Python 3.9+
+- **Language**: Python 3.9+, JavaScript (ES6+), HTML5, CSS3
 - **Machine Learning & Preprocessing**: [scikit-learn](https://scikit-learn.org/) (`LinearRegression`, `Pipeline`, `ColumnTransformer`, `OneHotEncoder`, `train_test_split`)
 - **Data Manipulation & Analysis**: [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/)
-- **Data Visualization**: [matplotlib](https://matplotlib.org/)
+- **Data Visualization**: [matplotlib](https://matplotlib.org/), [Chart.js](https://www.chartjs.org/)
 - **Model Persistence**: [joblib](https://joblib.readthedocs.io/)
-- **Version Control**: Git & GitHub
+- **Version Control & Hosting**: Git, GitHub, GitHub Pages
 
 ---
 
