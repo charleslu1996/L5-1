@@ -49,14 +49,13 @@ In venture capital and corporate finance, allocating capital effectively is crit
 
 | Category | Technologies |
 | :--- | :--- |
-| **In-Browser Python Engine** | [Pyodide](https://pyodide.org/) (CPython compiled to WebAssembly, 100% serverless for GitHub Pages) |
 | **Backend & Web Service** | Python 3.9+, Flask, Vercel Serverless Functions, WSGI |
 | **Machine Learning** | [scikit-learn](https://scikit-learn.org/) (`LinearRegression`, `Pipeline`, `ColumnTransformer`, `OneHotEncoder`, `train_test_split`) |
 | **Data Processing** | [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/) |
 | **Model Persistence** | [joblib](https://joblib.readthedocs.io/) |
 | **Visualization** | [Chart.js](https://www.chartjs.org/), [matplotlib](https://matplotlib.org/) |
 | **Frontend UI** | HTML5, CSS3 (Glassmorphism, Flexbox/Grid, CSS Variables) |
-| **Deployment & CI/CD** | GitHub Pages, Vercel, Git |
+| **Deployment & CI/CD** | GitHub Actions, GitHub Pages, Vercel, Git |
 
 ---
 

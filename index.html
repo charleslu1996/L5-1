@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
   <style>
     :root {
       --bg-primary: #0a0f1e;
@@ -613,142 +612,6 @@
       border: 1px solid rgba(239, 68, 68, 0.4);
     }
 
-    /* Pyodide Playground & Engine Bar */
-    .engine-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0.5rem;
-      padding: 0.45rem 0.8rem;
-      margin-top: 1.25rem;
-      color: var(--text-muted);
-    }
-
-    .engine-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      color: var(--accent-amber);
-    }
-
-    .engine-time {
-      margin-left: auto;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-
-    .pyodide-playground-container {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto 2rem;
-      padding: 0 1.5rem;
-    }
-
-    .py-card {
-      border-color: rgba(56, 189, 248, 0.25);
-    }
-
-    .py-badge-ready {
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .code-editor-box {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 0.75rem;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      background: #090d16;
-    }
-
-    .code-header {
-      background: rgba(30, 41, 59, 0.85);
-      padding: 0.6rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: #cbd5e1;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .run-py-btn {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #fff;
-      border: none;
-      padding: 0.35rem 0.85rem;
-      border-radius: 0.4rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-    }
-
-    .run-py-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-    }
-
-    .python-code-area {
-      width: 100%;
-      height: 190px;
-      background: #090d16;
-      color: #38bdf8;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      padding: 1rem;
-      border: none;
-      outline: none;
-      resize: vertical;
-      box-sizing: border-box;
-    }
-
-    .console-output-box {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0.75rem;
-      background: #050811;
-      overflow: hidden;
-    }
-
-    .console-header {
-      background: rgba(15, 23, 42, 0.9);
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
-      color: #94a3b8;
-      display: flex;
-      justify-content: space-between;
-      font-family: 'JetBrains Mono', monospace;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .console-output {
-      padding: 1rem;
-      margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #a7f3d0;
-      white-space: pre-wrap;
-      max-height: 150px;
-      overflow-y: auto;
-      line-height: 1.45;
-    }
-
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -774,19 +637,13 @@
 <body>
 
   <header>
-    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-      <div class="badge">
-        <div class="badge-dot"></div>
-        Interactive Machine Learning Demo
-      </div>
-      <div class="badge" id="py-status-badge" style="background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3); color: #fcd34d;">
-        <div class="badge-dot" id="py-status-dot" style="background: #f59e0b; box-shadow: 0 0 8px #f59e0b;"></div>
-        <span id="py-status-text">Python (WebAssembly): 載入環境中...</span>
-      </div>
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Interactive Machine Learning Demo
     </div>
     <h1>50 Startups Profit Predictor</h1>
     <p class="subtitle">
-      Multiple Linear Regression trained on the 50 Startups dataset via CRISP-DM methodology. 支援瀏覽器端 <strong>WebAssembly 真實 Python (Pyodide)</strong> 即時推論。
+      Multiple Linear Regression trained on the 50 Startups dataset via CRISP-DM methodology. Adjust the expenditure parameters to observe real-time profit estimation.
     </p>
   </header>
 
@@ -846,13 +703,6 @@
           <option value="New York">New York</option>
         </select>
       </div>
-
-      <!-- Engine Status Indicator -->
-      <div class="engine-bar" id="engine-bar">
-        <span>⚡ 運算核心:</span>
-        <span class="engine-tag" id="engine-tag">載入 Python Wasm 中...</span>
-        <span class="engine-time" id="engine-time">延遲: ~0.2ms</span>
-      </div>
     </section>
 
     <!-- Right Column: Real-time Output & Visualizations -->
@@ -903,43 +753,6 @@
       </div>
     </section>
   </main>
-
-  <!-- In-Browser Python (Pyodide / WebAssembly) Interactive Playground -->
-  <div class="pyodide-playground-container">
-    <section class="glass-card py-card">
-      <div class="card-title" style="justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-          </svg>
-          瀏覽器端 Python 即時運算台 (In-Browser WebAssembly Python)
-        </div>
-        <span class="py-badge-ready" id="playground-status-badge">🐍 Pyodide (CPython 3.12 WebAssembly)</span>
-      </div>
-
-      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.6;">
-        本網頁已內建 <strong>Pyodide (WebAssembly Python 執行環境)</strong>！當您在上方拖動滑桿時，下方 Python 程式碼會即時同步變數，並直接在您的<strong>使用者端瀏覽器</strong>內執行真實 Python 運算，<strong>100% 支援在 GitHub Pages 靜態網站上直接跑 Python！</strong>
-      </p>
-
-      <div class="code-editor-box">
-        <div class="code-header">
-          <span>📄 run_prediction.py (即時連動上方滑桿數據)</span>
-          <button class="run-py-btn" id="run-py-btn" onclick="executeUserPythonCode()">
-            ▶️ 執行 Python 程式碼 (Run in Browser)
-          </button>
-        </div>
-        <textarea id="python-code-input" class="python-code-area" spellcheck="false"></textarea>
-      </div>
-
-      <div class="console-output-box">
-        <div class="console-header">
-          <span>💻 Python 終端標準輸出 (Stdout / Terminal)</span>
-          <span id="py-exec-time-badge" style="color: var(--accent-emerald);">等待執行</span>
-        </div>
-        <pre id="python-console-output" class="console-output">Python WebAssembly 核心載入中，請稍候...</pre>
-      </div>
-    </section>
-  </div>
 
   <!-- Feature Performance & Model Diagnostics Section ("說明" 與特徵分析圖表) -->
   <div class="analysis-container">
@@ -1186,148 +999,6 @@
       });
     }
 
-    // ==========================================
-    // Pyodide WebAssembly Python Engine
-    // ==========================================
-    let pyodideInstance = null;
-    let isPythonReady = false;
-
-    async function initPyodideRuntime() {
-      const statusBadge = document.getElementById('py-status-badge');
-      const statusDot = document.getElementById('py-status-dot');
-      const statusText = document.getElementById('py-status-text');
-      const engineTag = document.getElementById('engine-tag');
-      const consoleOutput = document.getElementById('python-console-output');
-
-      try {
-        if (statusText) statusText.textContent = "Python (Pyodide): 下載 WebAssembly 核心中...";
-        if (consoleOutput) consoleOutput.textContent = "[系統] 正在由 jsDelivr CDN 下載 Pyodide (CPython 3.12 WebAssembly) 直譯器與執行環境...";
-
-        // Initialize Pyodide from CDN
-        pyodideInstance = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/"
-        });
-
-        // Setup the StartupProfitPredictor Python Class
-        await pyodideInstance.runPythonAsync(`
-import sys
-
-class StartupProfitPredictor:
-    def __init__(self):
-        self.intercept = 54343.2998
-        self.coef_rnd = 0.805630
-        self.coef_adm = -0.068788
-        self.coef_mkt = 0.029855
-        self.state_coefs = {
-            'California': -315.2603,
-            'Florida': 623.5328,
-            'New York': -308.2725
-        }
-    
-    def predict(self, rnd, adm, mkt, state):
-        state_adj = self.state_coefs.get(state, 0.0)
-        profit = self.intercept + (self.coef_rnd * rnd) + (self.coef_adm * adm) + (self.coef_mkt * mkt) + state_adj
-        return {
-            "profit": float(profit),
-            "rnd_impact": float(rnd * self.coef_rnd),
-            "adm_impact": float(adm * self.coef_adm),
-            "mkt_impact": float(mkt * self.coef_mkt),
-            "state_impact": float(state_adj),
-            "python_version": sys.version.split()[0]
-        }
-
-predictor = StartupProfitPredictor()
-print(f"[OK] Python {sys.version.split()[0]} WebAssembly 核心初始化完成！")
-`);
-
-        isPythonReady = true;
-
-        if (statusBadge) {
-          statusBadge.style.background = "rgba(16, 185, 129, 0.12)";
-          statusBadge.style.borderColor = "rgba(16, 185, 129, 0.3)";
-          statusBadge.style.color = "#34d399";
-        }
-        if (statusDot) {
-          statusDot.style.background = "var(--accent-emerald)";
-          statusDot.style.boxShadow = "0 0 8px var(--accent-emerald)";
-        }
-        if (statusText) {
-          statusText.textContent = "Python (Pyodide Wasm): 已就緒";
-        }
-        if (engineTag) {
-          engineTag.textContent = "🐍 Python 3.12 (Wasm)";
-          engineTag.style.color = "#34d399";
-        }
-        if (consoleOutput) {
-          consoleOutput.textContent = "[系統] Python WebAssembly 執行環境載入完畢！\n所有利潤預測皆直接由瀏覽器內建 CPython 核心計算，無需後端伺服器。\n您可直接修改上方 Python 程式碼並點擊執行。";
-        }
-
-        // Trigger immediate calculation with Python
-        updateCalculation();
-      } catch (err) {
-        console.warn("Pyodide 載入失敗或受限，自動切換至原生 JavaScript 運算:", err);
-        if (statusText) statusText.textContent = "Python 載入受限 (已使用 JS 引擎)";
-        if (engineTag) engineTag.textContent = "⚡ JavaScript 引擎 (Fallback)";
-      }
-    }
-
-    function updatePythonCodeSnippet(rnd, adm, mkt, state) {
-      const codeInput = document.getElementById('python-code-input');
-      if (!codeInput) return;
-
-      codeInput.value = `# 這是直接由您瀏覽器內部 WebAssembly 執行的真實 Python 程式碼
-rnd_spend = ${rnd.toFixed(1)}
-administration = ${adm.toFixed(1)}
-marketing_spend = ${mkt.toFixed(1)}
-state = "${state}"
-
-# 呼叫 Python 回歸推論物件
-result = predictor.predict(rnd_spend, administration, marketing_spend, state)
-
-print("=" * 45)
-print(f"🐍 Python 預測利潤 (Profit): \${result['profit']:,.2f}")
-print("=" * 45)
-print(f"• R&D 貢獻度:       +\${result['rnd_impact']:,.2f}")
-print(f"• 行銷貢獻度:       +\${result['mkt_impact']:,.2f}")
-print(f"• 行政成本影響:     \${result['adm_impact']:,.2f}")
-print(f"• 州別地理校準:     \${result['state_impact']:,.2f}")
-print(f"• 運算環境:         CPython {result['python_version']} (WebAssembly)")
-`;
-    }
-
-    async function executeUserPythonCode() {
-      if (!isPythonReady || !pyodideInstance) {
-        alert("Python 核心正在下載載入中，請稍候 3 秒後再試！");
-        return;
-      }
-      const code = document.getElementById('python-code-input').value;
-      const consoleOutput = document.getElementById('python-console-output');
-      const timeBadge = document.getElementById('py-exec-time-badge');
-
-      consoleOutput.textContent = "Python 直譯器執行中...";
-      const start = performance.now();
-
-      try {
-        pyodideInstance.runPython(`
-import io, sys
-sys.stdout = io.StringIO()
-sys.stderr = io.StringIO()
-`);
-
-        await pyodideInstance.runPythonAsync(code);
-
-        const stdout = pyodideInstance.runPython(`sys.stdout.getvalue()`);
-        const stderr = pyodideInstance.runPython(`sys.stderr.getvalue()`);
-        const duration = (performance.now() - start).toFixed(2);
-
-        timeBadge.textContent = `耗時: ${duration}ms`;
-        consoleOutput.textContent = (stdout || "(無輸出)") + (stderr ? `\n[STDERR]:\n${stderr}` : "");
-      } catch (err) {
-        consoleOutput.textContent = `[Python 執行錯誤]:\n${err}`;
-        timeBadge.textContent = "執行失敗";
-      }
-    }
-
     function applyPreset(rnd, adm, mkt, state) {
       document.getElementById('rnd-input').value = rnd;
       document.getElementById('adm-input').value = adm;
@@ -1346,51 +1017,12 @@ sys.stderr = io.StringIO()
       document.getElementById('mkt-val').textContent = `$${mkt.toLocaleString()}`;
       document.getElementById('adm-val').textContent = `$${adm.toLocaleString()}`;
 
-      updatePythonCodeSnippet(rnd, adm, mkt, state);
+      const rndImpact = rnd * COEF_RND;
+      const mktImpact = mkt * COEF_MKT;
+      const admImpact = adm * COEF_ADM;
+      const stateImpact = STATE_COEFS[state] || 0;
 
-      let totalProfit = 0;
-      let rndImpact = 0;
-      let admImpact = 0;
-      let mktImpact = 0;
-      let stateImpact = 0;
-      const startTime = performance.now();
-
-      if (isPythonReady && pyodideInstance) {
-        try {
-          const predictor = pyodideInstance.globals.get('predictor');
-          const pyResult = predictor.predict(rnd, adm, mkt, state);
-          const res = pyResult.toJs({ dict_converter: Object.fromEntries });
-
-          totalProfit = res.profit;
-          rndImpact = res.rnd_impact;
-          admImpact = res.adm_impact;
-          mktImpact = res.mkt_impact;
-          stateImpact = res.state_impact;
-
-          const elapsed = (performance.now() - startTime).toFixed(2);
-          const engineTime = document.getElementById('engine-time');
-          if (engineTime) engineTime.textContent = `Python 運算: ${elapsed}ms`;
-        } catch (e) {
-          console.error("Python 推論出錯，切換為 JavaScript 備援:", e);
-          rndImpact = rnd * COEF_RND;
-          mktImpact = mkt * COEF_MKT;
-          admImpact = adm * COEF_ADM;
-          stateImpact = STATE_COEFS[state] || 0;
-          totalProfit = INTERCEPT + rndImpact + admImpact + mktImpact + stateImpact;
-        }
-      } else {
-        // Instant JavaScript fallback while Pyodide is loading
-        rndImpact = rnd * COEF_RND;
-        mktImpact = mkt * COEF_MKT;
-        admImpact = adm * COEF_ADM;
-        stateImpact = STATE_COEFS[state] || 0;
-        totalProfit = INTERCEPT + rndImpact + admImpact + mktImpact + stateImpact;
-
-        const elapsed = (performance.now() - startTime).toFixed(2);
-        const engineTime = document.getElementById('engine-time');
-        if (engineTime) engineTime.textContent = `JS 運算: ${elapsed}ms`;
-      }
-
+      const totalProfit = INTERCEPT + rndImpact + admImpact + mktImpact + stateImpact;
       const totalExpense = rnd + mkt + adm;
       const margin = totalExpense > 0 ? ((totalProfit / totalExpense) * 100).toFixed(1) : '0';
 
@@ -1591,7 +1223,6 @@ sys.stderr = io.StringIO()
       initChart();
       initPerformanceCharts();
       updateCalculation();
-      initPyodideRuntime();
     });
   </script>
 </body>
