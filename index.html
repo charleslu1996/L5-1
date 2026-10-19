@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>50 Startups Profit Predictor | Live Demo</title>
-  <meta name="description" content="Interactive Live Demo for 50 Startups Profit Prediction using Multiple Linear Regression and CRISP-DM methodology.">
+  <meta name="description"
+    content="Interactive Live Demo for 50 Startups Profit Prediction using Multiple Linear Regression and CRISP-DM methodology.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
@@ -39,7 +43,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background-image: 
+      background-image:
         radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
         radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
@@ -634,6 +638,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -643,7 +648,8 @@
     </div>
     <h1>50 Startups Profit Predictor</h1>
     <p class="subtitle">
-      Multiple Linear Regression trained on the 50 Startups dataset via CRISP-DM methodology. Adjust the expenditure parameters to observe real-time profit estimation.
+      Multiple Linear Regression trained on the 50 Startups dataset via CRISP-DM methodology. Adjust the expenditure
+      parameters to observe real-time profit estimation.
     </p>
   </header>
 
@@ -652,7 +658,8 @@
     <section class="glass-card">
       <div class="card-title">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
         </svg>
         Spending & Location
       </div>
@@ -671,7 +678,8 @@
           <span>R&D Spend ($)</span>
           <span class="form-val-display" id="rnd-val">$100,000</span>
         </div>
-        <input type="range" class="range-slider" id="rnd-input" min="0" max="200000" step="1000" value="100000" oninput="updateCalculation()">
+        <input type="range" class="range-slider" id="rnd-input" min="0" max="200000" step="1000" value="100000"
+          oninput="updateCalculation()">
       </div>
 
       <!-- Input 2: Marketing Spend -->
@@ -680,7 +688,8 @@
           <span>Marketing Spend ($)</span>
           <span class="form-val-display" id="mkt-val">$200,000</span>
         </div>
-        <input type="range" class="range-slider" id="mkt-input" min="0" max="500000" step="2500" value="200000" oninput="updateCalculation()">
+        <input type="range" class="range-slider" id="mkt-input" min="0" max="500000" step="2500" value="200000"
+          oninput="updateCalculation()">
       </div>
 
       <!-- Input 3: Administration -->
@@ -689,7 +698,8 @@
           <span>Administration ($)</span>
           <span class="form-val-display" id="adm-val">$120,000</span>
         </div>
-        <input type="range" class="range-slider" id="adm-input" min="20000" max="250000" step="2000" value="120000" oninput="updateCalculation()">
+        <input type="range" class="range-slider" id="adm-input" min="20000" max="250000" step="2000" value="120000"
+          oninput="updateCalculation()">
       </div>
 
       <!-- Input 4: State -->
@@ -709,7 +719,8 @@
     <section class="glass-card">
       <div class="card-title">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
         Predicted Profit & Analysis
       </div>
@@ -749,7 +760,8 @@
       <!-- Formula Note -->
       <div class="equation-box">
         <strong>Fitted Formula:</strong><br>
-        Profit = 54,343.30 + <span class="hl">0.8056</span>×(R&D) - <span class="hl">0.0688</span>×(Admin) + <span class="hl">0.0299</span>×(Marketing) + <span class="hl">State_Coef</span>
+        Profit = 54,343.30 + <span class="hl">0.8056</span>×(R&D) - <span class="hl">0.0688</span>×(Admin) + <span
+          class="hl">0.0299</span>×(Marketing) + <span class="hl">State_Coef</span>
       </div>
     </section>
   </main>
@@ -761,7 +773,8 @@
         <div class="analysis-title-group">
           <h2>
             <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
             </svg>
             說明：特徵數量對模型表現的影響 (Forward Feature Selection)
           </h2>
@@ -772,16 +785,25 @@
 
         <!-- View Tabs -->
         <div class="analysis-tabs">
-          <button class="tab-btn active" id="tab-btn-python-plot" onclick="switchAnalysisTab('python-plot')">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            🖼️ 原始 Python 圖表 (Matplotlib 原圖)
-          </button>
           <button class="tab-btn" id="tab-btn-interactive" onclick="switchAnalysisTab('interactive')">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
             📈 互動式圖表 (Chart.js)
           </button>
+          <button class="tab-btn active" id="tab-btn-python-plot" onclick="switchAnalysisTab('python-plot')">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            🖼️ 原始 Python 圖表 (Matplotlib 原圖)
+          </button>
           <button class="tab-btn" id="tab-btn-actual-pred" onclick="switchAnalysisTab('actual-pred')">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
             🎯 實際值 vs 預測值圖
           </button>
         </div>
@@ -789,11 +811,13 @@
 
       <!-- Tab 1: Original Python Plot Image (features_performance.png) - Active by default -->
       <div id="tab-panel-python-plot" class="tab-content-panel" style="display: block;">
-        <div class="image-display-panel" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2);">
+        <div class="image-display-panel"
+          style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2);">
           <div style="margin-bottom: 0.75rem; font-weight: 700; color: #38bdf8; font-size: 0.95rem;">
             📊 說明：特徵數量對模型表現的影響 (RMSE & R-squared by Number of Features)
           </div>
-          <img src="./features_performance.png" alt="RMSE by Number of Features and R-squared by Number of Features" style="max-width: 1000px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.15);">
+          <img src="./features_performance.png" alt="RMSE by Number of Features and R-squared by Number of Features"
+            style="max-width: 1000px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.15);">
           <p class="image-caption">
             由 <code>plot_features_performance.py</code> 產出之原始圖表（左圖：RMSE 走勢；右圖：R² 走勢）
           </p>
@@ -806,7 +830,8 @@
           <!-- Left: RMSE Chart -->
           <div class="chart-panel">
             <div class="chart-panel-title">
-              <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#38bdf8;"></span>
+              <span
+                style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#38bdf8;"></span>
               RMSE by Number of Features
             </div>
             <div class="chart-canvas-wrapper">
@@ -817,7 +842,8 @@
           <!-- Right: R-squared Chart -->
           <div class="chart-panel">
             <div class="chart-panel-title">
-              <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+              <span
+                style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
               R-squared by Number of Features
             </div>
             <div class="chart-canvas-wrapper">
@@ -833,7 +859,8 @@
           <div style="margin-bottom: 0.75rem; font-weight: 700; color: #10b981; font-size: 0.95rem;">
             🎯 50 Startups: Actual vs Predicted Profit
           </div>
-          <img src="./actual_vs_predicted.png" alt="Actual vs Predicted Profit" style="max-width: 750px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.15);">
+          <img src="./actual_vs_predicted.png" alt="Actual vs Predicted Profit"
+            style="max-width: 750px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.15);">
           <p class="image-caption">
             由 <code>multiple_linear_regression.py</code> 產出之實際值與預測值殘差對照圖 (45度虛線為理想預測線)
           </p>
@@ -844,7 +871,8 @@
       <div class="explanation-section">
         <div class="explanation-header">
           <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           分析說明與結論 (Key Insights)
         </div>
@@ -855,7 +883,8 @@
             <div class="insight-tag">🏆 最佳模型組合</div>
             <div class="insight-title">2 個特徵 (R&D + Marketing)</div>
             <div class="insight-body">
-              在 2 個特徵時，<strong>測試集 RMSE 達到全域最低 8,198.80</strong>，且 <strong>R² 達到最高 0.9474</strong>。這證明結合研發與市場行銷預算是預測新創獲利的最精簡且最強大的黃金組合。
+              在 2 個特徵時，<strong>測試集 RMSE 達到全域最低 8,198.80</strong>，且 <strong>R² 達到最高
+                0.9474</strong>。這證明結合研發與市場行銷預算是預測新創獲利的最精簡且最強大的黃金組合。
             </div>
           </div>
 
@@ -864,7 +893,8 @@
             <div class="insight-tag" style="color: var(--accent-cyan);">💡 核心驅動力</div>
             <div class="insight-title">單一特徵 R&D 貢獻度最高</div>
             <div class="insight-body">
-              僅使用 <code>R&D Spend</code> 1 個特徵時，R² 即高達 <strong>0.9465</strong>（解釋了 94.65% 的利潤變異），代表研發投入是影響新創公司獲利最為關鍵的決定性指標。
+              僅使用 <code>R&D Spend</code> 1 個特徵時，R² 即高達 <strong>0.9465</strong>（解釋了 94.65%
+              的利潤變異），代表研發投入是影響新創公司獲利最為關鍵的決定性指標。
             </div>
           </div>
 
@@ -873,7 +903,8 @@
             <div class="insight-tag" style="color: var(--accent-amber);">⚠️ 邊際遞減與雜訊效應</div>
             <div class="insight-title">加入 State 與 Admin 導致過擬合</div>
             <div class="insight-body">
-              當加入第 3、4、5 個特徵（州別虛擬變數與行政費用）時，<strong>RMSE 顯著上升至 9,137.99</strong>，<strong>R² 下跌至 0.9347</strong>。顯示行政開支與地理位置對利潤並無直接統計推動力，反而引入多餘雜訊。
+              當加入第 3、4、5 個特徵（州別虛擬變數與行政費用）時，<strong>RMSE 顯著上升至 9,137.99</strong>，<strong>R² 下跌至
+                0.9347</strong>。顯示行政開支與地理位置對利潤並無直接統計推動力，反而引入多餘雜訊。
             </div>
           </div>
         </div>
@@ -914,7 +945,8 @@
               </tr>
               <tr>
                 <td><strong>4</strong></td>
-                <td><code>R&D Spend</code>, <code>Marketing Spend</code>, <code>State_New York</code>, <code>State_Florida</code></td>
+                <td><code>R&D Spend</code>, <code>Marketing Spend</code>, <code>State_New York</code>,
+                  <code>State_Florida</code></td>
                 <td>8,409.92</td>
                 <td>0.9447</td>
                 <td><span class="badge-status badge-warning">指標持續衰退</span></td>
@@ -934,7 +966,8 @@
   </div>
 
   <footer>
-    Project: <a href="https://github.com/charleslu1996/L5-1" target="_blank">charleslu1996/L5-1</a> | Built with Multiple Linear Regression & CRISP-DM Methodology
+    Project: <a href="https://github.com/charleslu1996/L5-1" target="_blank">charleslu1996/L5-1</a> | Built with
+    Multiple Linear Regression & CRISP-DM Methodology
   </footer>
 
   <script>
@@ -978,14 +1011,14 @@
             legend: { display: false },
             tooltip: {
               callbacks: {
-                label: (ctx) => `Contribution: $${ctx.parsed.y.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+                label: (ctx) => `Contribution: $${ctx.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
               }
             }
           },
           scales: {
             y: {
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { 
+              ticks: {
                 color: '#94a3b8',
                 callback: (val) => `$${(val / 1000).toFixed(0)}k`
               }
@@ -1026,13 +1059,13 @@
       const totalExpense = rnd + mkt + adm;
       const margin = totalExpense > 0 ? ((totalProfit / totalExpense) * 100).toFixed(1) : '0';
 
-      document.getElementById('profit-display').textContent = `$${totalProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('profit-display').textContent = `$${totalProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
       document.getElementById('roi-display').textContent = `Profit/Expense Ratio: ${margin}%`;
 
-      document.getElementById('rnd-impact').textContent = `${rndImpact >= 0 ? '+' : ''}$${rndImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-      document.getElementById('mkt-impact').textContent = `${mktImpact >= 0 ? '+' : ''}$${mktImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-      document.getElementById('adm-impact').textContent = `${admImpact >= 0 ? '+' : ''}$${admImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-      document.getElementById('state-impact').textContent = `${stateImpact >= 0 ? '+' : ''}$${stateImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('rnd-impact').textContent = `${rndImpact >= 0 ? '+' : ''}$${rndImpact.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('mkt-impact').textContent = `${mktImpact >= 0 ? '+' : ''}$${mktImpact.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('adm-impact').textContent = `${admImpact >= 0 ? '+' : ''}$${admImpact.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('state-impact').textContent = `${stateImpact >= 0 ? '+' : ''}$${stateImpact.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
       if (chartInstance) {
         chartInstance.data.datasets[0].data = [
@@ -1102,7 +1135,7 @@
               padding: 10,
               callbacks: {
                 title: (items) => `特徵數量: ${items[0].label} (${FEATURE_NAMES_BY_STEP[items[0].dataIndex]})`,
-                label: (ctx) => `測試集 RMSE: ${ctx.parsed.y.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+                label: (ctx) => `測試集 RMSE: ${ctx.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
               }
             }
           },
@@ -1226,4 +1259,5 @@
     });
   </script>
 </body>
+
 </html>

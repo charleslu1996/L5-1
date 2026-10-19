@@ -3,45 +3,48 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://charleslu1996.github.io/L5-1/)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.14-blue.svg)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/Framework-Flask%20%7C%20Vercel%20Serverless-black?style=flat&logo=flask)](https://flask.palletsprojects.com/)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=flat&logo=github-actions&logoColor=white)](https://github.com/charleslu1996/L5-1/actions)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-An end-to-end Machine Learning web application and data science project implementing the **CRISP-DM** (Cross-Industry Standard Process for Data Mining) methodology to analyze, model, and predict startup profitability based on expenditure profiles (`R&D Spend`, `Administration`, `Marketing Spend`) and geographical location (`State`).
+An end-to-end Machine Learning web application and data science project implementing the **CRISP-DM** (Cross-Industry Standard Process for Data Mining) methodology to analyze, evaluate, and predict startup profitability based on expenditure profiles (`R&D Spend`, `Administration`, `Marketing Spend`) and geographic headquarters (`State`).
 
 ---
 
 ## 🚀 Live Demo
 
-Experience the interactive web simulator and real-time inference model directly in your browser:
+Experience the interactive model simulation directly in your web browser:
 
 👉 **[Launch Interactive Web Demo (GitHub Pages)](https://charleslu1996.github.io/L5-1/)**
 
-### Web Demo Highlights
-- **Interactive Budget Sliders**: Fine-tune R&D, Marketing, and Administrative budgets in real time.
-- **Instant Machine Learning Inference**: Real-time profit calculations driven by Multiple Linear Regression.
-- **Dynamic Contribution Breakdown**: Visualizes the positive and negative dollar impacts of each budget component.
-- **Forward Feature Selection Diagnostic**: Side-by-side interactive curves analyzing **RMSE** and **$R^2$** across 1 to 5 features.
-- **Preset Scenarios**: One-click exploration of industry archetypes like *High-Growth Tech*, *Balanced Profile*, and *Early Bootstrapped*.
+### Key Features of the Live Demo
+- **Real-Time Sliders**: Adjust R&D Spend, Marketing Spend, Administration budget, and Company State dynamically.
+- **Instant Inference**: Computes predicted profit immediately using the fitted regression model with sub-millisecond latency.
+- **Financial Breakdown**: Visualizes positive and negative dollar contributions of each spending variable.
+- **Default Matplotlib Feature Analysis Plot**: Displays the original high-resolution `features_performance.png` chart directly on page load.
+- **Interactive Diagnostic Toggle**: Switch between the original Matplotlib chart, Chart.js interactive curves (RMSE & $R^2$), and the Actual vs. Predicted residual plot.
+- **Preset Scenarios**: Quick-test presets including *High-Growth Tech*, *Balanced Profile*, *Early Bootstrapped*, and *Zero R&D*.
 
 ---
 
 ## 📖 Introduction
 
-In venture capital and corporate finance, allocating capital effectively is critical to maximizing profitability. This project utilizes the **50 Startups dataset** to uncover how financial allocations impact net profit:
-- **Primary Profit Drivers**: Pinpoints which expenditures generate statistically significant positive returns.
-- **Feature Optimization**: Employs Forward Feature Selection to identify the most parsimonious model that minimizes prediction error (**RMSE**) while maximizing explanatory power (**$R^2$**).
-- **Production-Ready Web Service**: Wraps the trained model in a modern Flask web server configured for zero-friction deployment to Vercel Serverless Functions.
+In venture capital and corporate financial planning, knowing where to deploy capital is fundamental to maximizing return on investment. This project analyzes the **50 Startups dataset** to uncover how financial allocations drive net profitability:
+
+1. **Statistical Significance**: Identifies which expenditure categories serve as true profit drivers versus those that merely represent operational overhead.
+2. **Feature Optimization**: Employs **Forward Feature Selection** across 1 to 5 features to identify the most parsimonious model that minimizes Root Mean Squared Error (**RMSE**) and maximizes explained variance (**$R^2$**).
+3. **Production Web Application**: Provides a dual-hosting architecture: a client-side zero-dependency static web app for **GitHub Pages**, and a **Flask** application ready for **Vercel Serverless Functions** and REST API consumption.
 
 ---
 
 ## ✨ Features
 
-- **Full CRISP-DM Lifecycle**: Structured rigorously across Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment.
-- **Interactive Glassmorphism Dashboard**: Premium dark-mode UI with Chart.js charts, responsive design, and real-time slider controls.
-- **Forward Feature Selection Analysis**: Evaluates subset model performance across 1 to 5 features, identifying that a **2-feature subset (`R&D` + `Marketing`)** delivers optimal accuracy ($R^2 \approx 0.9474$, $\text{RMSE} \approx 8,198.80$).
-- **Vercel Serverless & REST API**: Exposes `/api/predict` (POST/GET) and `/api/health` endpoints powered by Flask.
-- **Robust Scikit-Learn Pipelines**: Uses `ColumnTransformer` and `OneHotEncoder` to encode categorical location features while avoiding data leakage and dummy variable traps.
-- **Model Persistence**: Serializes the fitted pipeline to disk as `startup_profit_model.joblib` for instantaneous offline or online inference.
-- **Automated Diagnostic Plots**: Generates publication-ready evaluation charts (`features_performance.png` and `actual_vs_predicted.png`).
+- **CRISP-DM 6-Phase Lifecycle**: Structured rigorously across Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment.
+- **Interactive Glassmorphism Dashboard**: Modern dark-mode UI styled with CSS backdrop-filter blur, responsive CSS grid, and Chart.js visualizations.
+- **Forward Feature Selection Analysis**: Demonstrates that a **2-feature subset (`R&D Spend` + `Marketing Spend`)** delivers the optimal test-set accuracy ($R^2 \approx 0.9474$, $\text{RMSE} \approx 8,198.80$), outperforming the full 5-feature model.
+- **Automated GitHub Actions CI/CD Pipeline**: Automatically trains the model, executes feature selection, exports model metrics directly into **GitHub Actions Job Summary (`$GITHUB_STEP_SUMMARY`)**, uploads diagnostic plots as artifacts, and deploys to GitHub Pages.
+- **RESTful API & Serverless Support**: Provides `/api/predict` (POST/GET) and `/api/health` endpoints powered by Flask for external integration.
+- **Robust Scikit-Learn Pipelines**: Uses `ColumnTransformer` and `OneHotEncoder` to encode categorical location features without data leakage or dummy variable traps.
+- **Model Serialization**: Persists the fitted model pipeline as `startup_profit_model.joblib` for instantaneous offline and online inference.
 
 ---
 
@@ -49,19 +52,19 @@ In venture capital and corporate finance, allocating capital effectively is crit
 
 | Category | Technologies |
 | :--- | :--- |
-| **Backend & Web Service** | Python 3.9+, Flask, Vercel Serverless Functions, WSGI |
+| **Backend & Web API** | Python 3.9+, Flask, WSGI, Vercel Serverless Functions |
 | **Machine Learning** | [scikit-learn](https://scikit-learn.org/) (`LinearRegression`, `Pipeline`, `ColumnTransformer`, `OneHotEncoder`, `train_test_split`) |
-| **Data Processing** | [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/) |
+| **Data Manipulation** | [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/) |
 | **Model Persistence** | [joblib](https://joblib.readthedocs.io/) |
-| **Visualization** | [Chart.js](https://www.chartjs.org/), [matplotlib](https://matplotlib.org/) |
-| **Frontend UI** | HTML5, CSS3 (Glassmorphism, Flexbox/Grid, CSS Variables) |
-| **Deployment & CI/CD** | GitHub Actions, GitHub Pages, Vercel, Git |
+| **Data Visualization** | [matplotlib](https://matplotlib.org/), [Chart.js](https://www.chartjs.org/) |
+| **Frontend UI** | HTML5, Vanilla CSS3 (Glassmorphism, CSS Grid & Flexbox, JetBrains Mono font) |
+| **CI/CD & Hosting** | GitHub Actions, GitHub Pages, Vercel, Git |
 
 ---
 
 ## 💻 Installation (CLI)
 
-Follow these steps to set up the project locally using the command line:
+Follow these steps to set up the project locally from the command line:
 
 ### 1. Clone the Repository
 ```bash
@@ -71,19 +74,19 @@ cd L5-1
 
 ### 2. Create and Activate a Virtual Environment
 
-- **On macOS / Linux**:
+- **macOS / Linux**:
   ```bash
   python3 -m venv .venv
   source .venv/bin/activate
   ```
 
-- **On Windows (PowerShell)**:
+- **Windows (PowerShell)**:
   ```powershell
   python -m venv .venv
   .venv\Scripts\Activate.ps1
   ```
 
-- **On Windows (Command Prompt)**:
+- **Windows (Command Prompt)**:
   ```cmd
   python -m venv .venv
   .venv\Scripts\activate.bat
@@ -96,10 +99,10 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Usage Examples
+## 🚀 Usage (Examples)
 
-### 1. Launch the Local Web Application & REST API
-Run the Flask server locally:
+### 1. Launch the Local Web Server & API
+Start the Flask web server locally:
 ```bash
 python main.py
 ```
@@ -111,8 +114,8 @@ This serves the interactive user interface and provides live API endpoints.
 
 ---
 
-### 2. Query the Prediction API (cURL / HTTP)
-You can send HTTP POST requests to `/api/predict` or `/predict` to get instant predictions:
+### 2. Query the Prediction REST API
+Send an HTTP POST request to `/api/predict` or `/predict` to get model predictions:
 
 ```bash
 curl -X POST http://localhost:5000/api/predict \
@@ -125,7 +128,7 @@ curl -X POST http://localhost:5000/api/predict \
   }'
 ```
 
-**JSON Response:**
+**Sample JSON Response:**
 ```json
 {
   "status": "success",
@@ -148,13 +151,13 @@ curl -X POST http://localhost:5000/api/predict \
 
 ---
 
-### 3. Run the CRISP-DM Model Training Pipeline
+### 3. Run the CRISP-DM Machine Learning Pipeline
 Train the model, evaluate metrics, and export `startup_profit_model.joblib`:
 ```bash
 python multiple_linear_regression.py
 ```
 
-**Sample Terminal Output:**
+**Terminal Output:**
 ```text
 ===== STEP 4: MODELING =====
 Intercept: 54343.30
@@ -181,7 +184,7 @@ Saved plot: actual_vs_predicted.png
 
 ---
 
-### 4. Run Forward Feature Selection & Generate Diagnostic Charts
+### 4. Run Forward Feature Selection & Generate Diagnostic Plots
 Run the feature selection script to evaluate model performance across 1 to 5 features:
 ```bash
 python plot_features_performance.py
@@ -190,25 +193,25 @@ python plot_features_performance.py
 **Forward Feature Selection Results:**
 
 | Features Selected | Active Features | Test RMSE | Test $R^2$ | Status |
-| :---: | :--- | :---: | :---: | :---: |
+| :---: | :--- | :---: | :---: | :--- |
 | **1** | `R&D Spend` | 8,274.87 | 0.9465 | Strong baseline |
-| **2 (Optimal)** | `R&D Spend`, `Marketing Spend` | **8,198.80** | **0.9474** | 🏆 Best performance |
-| **3** | `R&D Spend`, `Marketing Spend`, `State_New York` | 8,309.06 | 0.9460 | Slight degradation |
-| **4** | `R&D Spend`, `Marketing Spend`, `State_New York`, `State_Florida` | 8,409.92 | 0.9447 | Downward trend |
+| **2 (Optimal)** | `R&D Spend`, `Marketing Spend` | **8,198.80** | **0.9474** | 🏆 **Optimal subset (lowest error, highest $R^2$)** |
+| **3** | `R&D Spend`, `Marketing Spend`, `State_New York` | 8,309.06 | 0.9460 | Slight performance drop |
+| **4** | `R&D Spend`, `Marketing Spend`, `State_New York`, `State_Florida` | 8,409.92 | 0.9447 | Continued degradation |
 | **5** | All 5 Features (including `Administration`) | 9,137.99 | 0.9347 | Overfitting / Noise |
 
 ---
 
-### 5. Python In-Code Inference with Saved Model
-Load the serialized pipeline in any Python script:
+### 5. Python In-Code Inference with Serialized Model
+Load the exported pipeline in your own Python script:
 ```python
 import joblib
 import pandas as pd
 
-# 1. Load fitted pipeline
+# Load saved pipeline
 model = joblib.load("startup_profit_model.joblib")
 
-# 2. Provide new venture parameters
+# Input expenditure data for a new venture
 new_startup = pd.DataFrame([{
     "R&D Spend": 165349.20,
     "Administration": 136897.80,
@@ -216,26 +219,36 @@ new_startup = pd.DataFrame([{
     "State": "New York"
 }])
 
-# 3. Predict profit
-profit = model.predict(new_startup)[0]
-print(f"Predicted Startup Profit: ${profit:,.2f}")
+# Predict profit
+predicted_profit = model.predict(new_startup)[0]
+print(f"Predicted Startup Profit: ${predicted_profit:,.2f}")
 ```
 
 ---
 
-## 🌐 Deployment
+## 🤖 GitHub Actions CI/CD Pipeline
 
-### Deploying to Vercel (Serverless Function)
-This repository is pre-configured for Vercel Python deployment:
-1. Push your repository to GitHub.
-2. Import the project in the [Vercel Dashboard](https://vercel.com/).
-3. Vercel automatically detects `main.py` and `requirements.txt` to deploy the app with zero additional configuration.
+The repository includes an automated workflow defined in [`.github/workflows/ml_pipeline.yml`](.github/workflows/ml_pipeline.yml). On every push to `main`:
+1. **Automated Execution**: Runs `multiple_linear_regression.py` and `plot_features_performance.py`.
+2. **Job Summary Report**: Renders an executive markdown summary with full metric tables, regression coefficients, and business insights directly on the GitHub Actions Run page.
+3. **Artifact Archival**: Saves `features_performance.png`, `actual_vs_predicted.png`, and `startup_profit_model.joblib` as downloadable artifacts.
+4. **GitHub Pages Deployment**: Deploys the static web application automatically to GitHub Pages.
 
-### Deploying to GitHub Pages
-The static interface can be hosted directly on GitHub Pages:
+---
+
+## 🌐 Deployment Options
+
+### 1. Deploying to GitHub Pages
+The web simulator runs natively on GitHub Pages:
 1. In your GitHub repository, navigate to **Settings** > **Pages**.
-2. Under **Branch**, select `main` and set folder to `/(root)`.
-3. Save to publish the live interactive demo at `https://<username>.github.io/<repo>/`.
+2. Under **Build and deployment** > **Source**, choose **GitHub Actions** (or select `main` branch with `/(root)`).
+3. The automated workflow will publish the demo to `https://<username>.github.io/<repo>/`.
+
+### 2. Deploying to Vercel
+This repository includes [`pyproject.toml`](pyproject.toml) and [`main.py`](main.py) pre-configured for Vercel:
+1. Push your changes to GitHub.
+2. In the [Vercel Dashboard](https://vercel.com/), click **Add New Project** and import this repository.
+3. Vercel automatically detects `main.py` and `requirements.txt` to deploy the app with zero additional configuration.
 
 ---
 
