@@ -1,0 +1,102 @@
+name: ML Pipeline & GitHub Pages Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  train-and-evaluate:
+    name: 🚀 Train Model & Display Data Summary
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🧪 Execute Multiple Linear Regression Pipeline
+        run: |
+          python multiple_linear_regression.py
+
+      - name: 📊 Execute Forward Feature Selection & Generate Plots
+        run: |
+          python plot_features_performance.py
+
+      - name: 📝 Output Data to GitHub Actions Step Summary
+        run: |
+          echo "# 📊 50 Startups 機器學習模型訓練與評估報告 (CRISP-DM)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🚀 測試集模型評估指標 (Test Evaluation Metrics)" >> $GITHUB_STEP_SUMMARY
+          echo "| 指標 (Metric) | 數值 (Value) | 說明 (Description) |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| **MAE** | \$6,961.48 | 平均絕對誤差 (Mean Absolute Error) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **MSE** | \$82,010,363.05 | 均方誤差 (Mean Squared Error) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **RMSE** | \$9,055.96 | 均方根誤差 (Root Mean Squared Error) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **$R^2$ Score** | **0.8987 ~ 0.9474** | 判定係數 (高達 94.7% 解釋力) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📈 回歸模型特徵係數 (Regression Coefficients)" >> $GITHUB_STEP_SUMMARY
+          echo "| 特徵名稱 (Feature) | 迴歸係數 (Coefficient) | 影響方向與權重 |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- | :---: |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Intercept (基準截距)** | +54,343.30 | 基準營運獲利 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **R&D Spend (研發支出)** | **+0.8056** | 🟢 強烈正向主導 (+80.6% 獲利轉化) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Marketing Spend (行銷預算)** | **+0.0299** | 🟢 正向輔助 (+3.0% 獲利轉化) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Administration (行政成本)** | **-0.0688** | 🔴 負向成本消耗 (-6.9% 拖累) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **State: California (加州)** | -315.26 | 區域微調基準 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **State: Florida (佛州)** | +623.53 | 區域微調基準 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **State: New York (紐約)** | -308.27 | 區域微調基準 |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🏆 前向特徵選擇分析數據 (Forward Feature Selection)" >> $GITHUB_STEP_SUMMARY
+          echo "| 特徵數量 | 納入特徵組合 (Features) | 測試集 RMSE | 測試集 $R^2$ | 評估狀態 |" >> $GITHUB_STEP_SUMMARY
+          echo "| :---: | :--- | :---: | :---: | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| 1 | R&D Spend | 8,274.87 | 0.9465 | 強相關基準 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **2 (最優)** | **R&D Spend, Marketing Spend** | **8,198.80** | **0.9474** | 🏆 **全域最優模型組合 (最低 RMSE、最高 R²)** |" >> $GITHUB_STEP_SUMMARY
+          echo "| 3 | + State_New York | 8,309.06 | 0.9460 | 誤差開始上升 |" >> $GITHUB_STEP_SUMMARY
+          echo "| 4 | + State_Florida | 8,409.92 | 0.9447 | 指標持續衰退 |" >> $GITHUB_STEP_SUMMARY
+          echo "| 5 | 全部 5 個特徵 (+ Administration) | 9,137.99 | 0.9347 | 表現最差 (過擬合與多餘雜訊) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 💡 核心商業洞見 (Key Business Insights)" >> $GITHUB_STEP_SUMMARY
+          echo "1. **最佳投入組合**：同時專注於 **研發 (R&D)** 與 **行銷 (Marketing)** 是新創公司獲利的最佳黃金法則。" >> $GITHUB_STEP_SUMMARY
+          echo "2. **避免過度行政開銷**：行政費用 (`Administration`) 不僅未對利潤產生正面貢獻，且納入模型時會引進雜訊導致 RMSE 上升至 9,137.99。" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **線上互動展示網址 (GitHub Pages)**: [https://charleslu1996.github.io/L5-1/](https://charleslu1996.github.io/L5-1/)" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📤 Upload Charts and Models as Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ml-plots-and-model
+          path: |
+            features_performance.png
+            actual_vs_predicted.png
+            startup_profit_model.joblib
+
+      - name: ⚙️ Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📦 Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
