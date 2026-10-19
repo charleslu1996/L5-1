@@ -20,8 +20,8 @@ Experience the interactive model simulation directly in your web browser:
 - **Real-Time Sliders**: Adjust R&D Spend, Marketing Spend, Administration budget, and Company State dynamically.
 - **Instant Inference**: Computes predicted profit immediately using the fitted regression model with sub-millisecond latency.
 - **Financial Breakdown**: Visualizes positive and negative dollar contributions of each spending variable.
-- **Default Matplotlib Feature Analysis Plot**: Displays the original high-resolution `features_performance.png` chart directly on page load.
-- **Interactive Diagnostic Toggle**: Switch between the original Matplotlib chart, Chart.js interactive curves (RMSE & $R^2$), and the Actual vs. Predicted residual plot.
+- **Interactive Chart.js Curves**: Visualizes RMSE and $R^2$ trends dynamically across feature subsets (1 to 5 features).
+- **Diagnostic Residual Plot**: View the Actual vs. Predicted residual comparison chart directly in the diagnostics tab.
 - **Preset Scenarios**: Quick-test presets including *High-Growth Tech*, *Balanced Profile*, *Early Bootstrapped*, and *Zero R&D*.
 
 ---

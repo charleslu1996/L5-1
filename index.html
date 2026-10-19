@@ -785,19 +785,12 @@
 
         <!-- View Tabs -->
         <div class="analysis-tabs">
-          <button class="tab-btn" id="tab-btn-interactive" onclick="switchAnalysisTab('interactive')">
+          <button class="tab-btn active" id="tab-btn-interactive" onclick="switchAnalysisTab('interactive')">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
             📈 互動式圖表 (Chart.js)
-          </button>
-          <button class="tab-btn active" id="tab-btn-python-plot" onclick="switchAnalysisTab('python-plot')">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            🖼️ 原始 Python 圖表 (Matplotlib 原圖)
           </button>
           <button class="tab-btn" id="tab-btn-actual-pred" onclick="switchAnalysisTab('actual-pred')">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -809,23 +802,8 @@
         </div>
       </div>
 
-      <!-- Tab 1: Original Python Plot Image (features_performance.png) - Active by default -->
-      <div id="tab-panel-python-plot" class="tab-content-panel" style="display: block;">
-        <div class="image-display-panel"
-          style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2);">
-          <div style="margin-bottom: 0.75rem; font-weight: 700; color: #38bdf8; font-size: 0.95rem;">
-            📊 說明：特徵數量對模型表現的影響 (RMSE & R-squared by Number of Features)
-          </div>
-          <img src="./features_performance.png" alt="RMSE by Number of Features and R-squared by Number of Features"
-            style="max-width: 1000px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.15);">
-          <p class="image-caption">
-            由 <code>plot_features_performance.py</code> 產出之原始圖表（左圖：RMSE 走勢；右圖：R² 走勢）
-          </p>
-        </div>
-      </div>
-
-      <!-- Tab 2: Interactive Charts (Chart.js) -->
-      <div id="tab-panel-interactive" class="tab-content-panel" style="display: none;">
+      <!-- Tab 1: Interactive Charts (Chart.js) - Active by default -->
+      <div id="tab-panel-interactive" class="tab-content-panel" style="display: block;">
         <div class="charts-grid">
           <!-- Left: RMSE Chart -->
           <div class="chart-panel">
