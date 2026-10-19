@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 Startups Profit Predictor | Live Demo</title>
+  <meta name="description" content="Interactive Live Demo for 50 Startups Profit Prediction using Multiple Linear Regression and CRISP-DM methodology.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0a0f1e;
+      --bg-secondary: #111827;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(99, 102, 241, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-violet: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --glow-gradient: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15), transparent 70%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .card-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent-cyan);
+    }
+
+    /* Preset Buttons */
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .preset-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .preset-btn:hover {
+      background: rgba(99, 102, 241, 0.2);
+      color: #fff;
+      border-color: var(--accent-violet);
+    }
+
+    /* Input controls */
+    .form-group {
+      margin-bottom: 1.35rem;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #e2e8f0;
+    }
+
+    .form-val-display {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .range-slider {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      margin-top: 0.4rem;
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    select.input-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.65rem;
+      color: #f8fafc;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    select.input-control:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Prediction Display Card */
+    .prediction-container {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prediction-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .prediction-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .prediction-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      color: var(--accent-emerald);
+      text-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+      letter-spacing: -0.02em;
+      transition: all 0.3s ease;
+    }
+
+    .roi-badge {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Breakdown table & items */
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .breakdown-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.9rem;
+      border-radius: 0.75rem;
+    }
+
+    .breakdown-name {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .breakdown-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    /* Equation formula banner */
+    .equation-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .equation-box span.hl {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Interactive Machine Learning Demo
+    </div>
+    <h1>50 Startups Profit Predictor</h1>
+    <p class="subtitle">
+      Multiple Linear Regression trained on the 50 Startups dataset via CRISP-DM methodology. Adjust the expenditure parameters to observe real-time profit estimation.
+    </p>
+  </header>
+
+  <main>
+    <!-- Left Column: Interactive Inputs -->
+    <section class="glass-card">
+      <div class="card-title">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+        </svg>
+        Spending & Location
+      </div>
+
+      <!-- Quick Preset Buttons -->
+      <div class="presets">
+        <button class="preset-btn" onclick="applyPreset(165349, 136897, 471784, 'New York')">High-Growth Tech</button>
+        <button class="preset-btn" onclick="applyPreset(100000, 120000, 200000, 'California')">Balanced Profile</button>
+        <button class="preset-btn" onclick="applyPreset(30000, 90000, 60000, 'Florida')">Early Bootstrapped</button>
+        <button class="preset-btn" onclick="applyPreset(0, 50000, 10000, 'California')">Zero R&D</button>
+      </div>
+
+      <!-- Input 1: R&D Spend -->
+      <div class="form-group">
+        <div class="form-label">
+          <span>R&D Spend ($)</span>
+          <span class="form-val-display" id="rnd-val">$100,000</span>
+        </div>
+        <input type="range" class="range-slider" id="rnd-input" min="0" max="200000" step="1000" value="100000" oninput="updateCalculation()">
+      </div>
+
+      <!-- Input 2: Marketing Spend -->
+      <div class="form-group">
+        <div class="form-label">
+          <span>Marketing Spend ($)</span>
+          <span class="form-val-display" id="mkt-val">$200,000</span>
+        </div>
+        <input type="range" class="range-slider" id="mkt-input" min="0" max="500000" step="2500" value="200000" oninput="updateCalculation()">
+      </div>
+
+      <!-- Input 3: Administration -->
+      <div class="form-group">
+        <div class="form-label">
+          <span>Administration ($)</span>
+          <span class="form-val-display" id="adm-val">$120,000</span>
+        </div>
+        <input type="range" class="range-slider" id="adm-input" min="20000" max="250000" step="2000" value="120000" oninput="updateCalculation()">
+      </div>
+
+      <!-- Input 4: State -->
+      <div class="form-group">
+        <div class="form-label">
+          <span>Company State</span>
+        </div>
+        <select class="input-control" id="state-input" onchange="updateCalculation()">
+          <option value="California" selected>California</option>
+          <option value="Florida">Florida</option>
+          <option value="New York">New York</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Right Column: Real-time Output & Visualizations -->
+    <section class="glass-card">
+      <div class="card-title">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Predicted Profit & Analysis
+      </div>
+
+      <!-- Hero Output -->
+      <div class="prediction-container">
+        <div class="prediction-label">Estimated Startup Profit</div>
+        <div class="prediction-value" id="profit-display">$132,307.59</div>
+        <div class="roi-badge" id="roi-display">Net Margin: +31.5%</div>
+      </div>
+
+      <!-- Contribution Breakdown -->
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <div class="breakdown-name">R&D Impact (+80.6%)</div>
+          <div class="breakdown-val" id="rnd-impact">+$80,563.00</div>
+        </div>
+        <div class="breakdown-box">
+          <div class="breakdown-name">Marketing Impact (+3.0%)</div>
+          <div class="breakdown-val" id="mkt-impact">+$5,971.00</div>
+        </div>
+        <div class="breakdown-box">
+          <div class="breakdown-name">Admin Impact (-6.9%)</div>
+          <div class="breakdown-val" id="adm-impact">-$8,254.56</div>
+        </div>
+        <div class="breakdown-box">
+          <div class="breakdown-name">State Adjustment</div>
+          <div class="breakdown-val" id="state-impact">-$315.26</div>
+        </div>
+      </div>
+
+      <!-- Live Interactive Bar Chart -->
+      <div style="height: 180px; margin-bottom: 1.25rem;">
+        <canvas id="impactChart"></canvas>
+      </div>
+
+      <!-- Formula Note -->
+      <div class="equation-box">
+        <strong>Fitted Formula:</strong><br>
+        Profit = 54,343.30 + <span class="hl">0.8056</span>×(R&D) - <span class="hl">0.0688</span>×(Admin) + <span class="hl">0.0299</span>×(Marketing) + <span class="hl">State_Coef</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Project: <a href="https://github.com/charleslu1996/L5-1" target="_blank">charleslu1996/L5-1</a> | Built with Multiple Linear Regression & CRISP-DM Methodology
+  </footer>
+
+  <script>
+    // Trained Model Coefficients (from multiple_linear_regression.py)
+    const INTERCEPT = 54343.2998;
+    const COEF_RND = 0.805630;
+    const COEF_ADM = -0.068788;
+    const COEF_MKT = 0.029855;
+    const STATE_COEFS = {
+      'California': -315.2603,
+      'Florida': 623.5328,
+      'New York': -308.2725
+    };
+
+    let chartInstance = null;
+
+    function initChart() {
+      const ctx = document.getElementById('impactChart').getContext('2d');
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Base Intercept', 'R&D', 'Marketing', 'Admin', 'State'],
+          datasets: [{
+            label: 'Dollar Contribution ($)',
+            data: [INTERCEPT, 0, 0, 0, 0],
+            backgroundColor: [
+              'rgba(148, 163, 184, 0.6)',
+              'rgba(16, 185, 129, 0.7)',
+              'rgba(6, 182, 212, 0.7)',
+              'rgba(239, 68, 68, 0.7)',
+              'rgba(139, 92, 246, 0.7)'
+            ],
+            borderRadius: 6,
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `Contribution: $${ctx.parsed.y.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+              }
+            }
+          },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { 
+                color: '#94a3b8',
+                callback: (val) => `$${(val / 1000).toFixed(0)}k`
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8' }
+            }
+          }
+        }
+      });
+    }
+
+    function applyPreset(rnd, adm, mkt, state) {
+      document.getElementById('rnd-input').value = rnd;
+      document.getElementById('adm-input').value = adm;
+      document.getElementById('mkt-input').value = mkt;
+      document.getElementById('state-input').value = state;
+      updateCalculation();
+    }
+
+    function updateCalculation() {
+      const rnd = parseFloat(document.getElementById('rnd-input').value);
+      const mkt = parseFloat(document.getElementById('mkt-input').value);
+      const adm = parseFloat(document.getElementById('adm-input').value);
+      const state = document.getElementById('state-input').value;
+
+      document.getElementById('rnd-val').textContent = `$${rnd.toLocaleString()}`;
+      document.getElementById('mkt-val').textContent = `$${mkt.toLocaleString()}`;
+      document.getElementById('adm-val').textContent = `$${adm.toLocaleString()}`;
+
+      const rndImpact = rnd * COEF_RND;
+      const mktImpact = mkt * COEF_MKT;
+      const admImpact = adm * COEF_ADM;
+      const stateImpact = STATE_COEFS[state] || 0;
+
+      const totalProfit = INTERCEPT + rndImpact + admImpact + mktImpact + stateImpact;
+      const totalExpense = rnd + mkt + adm;
+      const margin = totalExpense > 0 ? ((totalProfit / totalExpense) * 100).toFixed(1) : '0';
+
+      document.getElementById('profit-display').textContent = `$${totalProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('roi-display').textContent = `Profit/Expense Ratio: ${margin}%`;
+
+      document.getElementById('rnd-impact').textContent = `${rndImpact >= 0 ? '+' : ''}$${rndImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('mkt-impact').textContent = `${mktImpact >= 0 ? '+' : ''}$${mktImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('adm-impact').textContent = `${admImpact >= 0 ? '+' : ''}$${admImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('state-impact').textContent = `${stateImpact >= 0 ? '+' : ''}$${stateImpact.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+      if (chartInstance) {
+        chartInstance.data.datasets[0].data = [
+          INTERCEPT,
+          rndImpact,
+          mktImpact,
+          admImpact,
+          stateImpact
+        ];
+        chartInstance.update();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initChart();
+      updateCalculation();
+    });
+  </script>
+</body>
+</html>
